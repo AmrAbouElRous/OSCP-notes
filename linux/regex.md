@@ -35,22 +35,23 @@ EOF
 
 | # | Description | Command |
 |---|--------------|----------|
-| **1** | Find lines containing the word “ERROR” | `grep -E 'ERROR' file.txt` |
-| **2** | Find lines starting with “INFO” | `grep -E '^INFO' file.txt` |
-| **3** | Find lines ending with “bash” | `grep -E 'bash$' file.txt` |
-| **4** | Find lines that contain a number | `grep -E '[0-9]+' file.txt` |
-| **5** | Find lines containing an email address | `grep -E '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' file.txt` |
-| **6** | Find lines containing “color” or “colour” | `grep -E 'colou?r' file.txt` |
-| **7** | Find lines with uppercase words only (like INFO, WARN, ERROR) | `grep -E '^[A-Z]+$' file.txt` |
-| **8** | Find lines with lowercase words only | `grep -E '^[a-z ]+$' file.txt` |
-| **9** | Find lines that contain both letters and digits | `grep -E '([A-Za-z].*[0-9]|[0-9].*[A-Za-z])' file.txt` |
-| **10** | Find lines between 20–40 characters long | `grep -E '^.{20,40}$' file.txt` |
-| **11** | Find lines that contain “amro” (case-insensitive) | `grep -Ei 'amro' file.txt` |
-| **12** | Show lines that do not contain the word “INFO” | `grep -Ev 'INFO' file.txt` |
-| **13** | Show lines starting with # (comments only) | `grep -E '^#' file.txt` |
-| **14** | Show empty (blank) lines | `grep -E '^$' file.txt` |
-| **15** | Remove all comments and blank lines ✅ | `grep -Ev '^(#|$)' file.txt` |
-| **16** | Show lines that start with a digit | `grep -E '^[0-9]' file.txt` |
+| 1 | Find lines containing the word “ERROR” | `grep -E 'ERROR' file.txt` |
+| 2 | Find lines starting with “INFO” | `grep -E '^INFO' file.txt` |
+| 3 | Find lines ending with “bash” | `grep -E 'bash$' file.txt` |
+| 4 | Find lines that contain a number | `grep -E '[0-9]+' file.txt` |
+| 5 | Find lines containing an email address | `grep -E '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' file.txt` |
+| 6 | Find lines containing “color” or “colour” | `grep -E 'colou?r' file.txt` |
+| 7 | Find lines with uppercase words only (like INFO, WARN, ERROR) | `grep -E '^[A-Z]+$' file.txt` |
+| 8 | Find lines with lowercase words only | `grep -E '^[a-z ]+$' file.txt` |
+| 9 | Find lines that contain both letters and digits | `grep -E '([A-Za-z].*[0-9]\|[0-9].*[A-Za-z])' file.txt` |
+| 10 | Find lines between 20–40 characters long | `grep -E '^.{20,40}$' file.txt` |
+| 11 | Find lines that contain “amro” (case-insensitive) | `grep -Ei 'amro' file.txt` |
+| 12 | Show lines that do not contain the word “INFO” | `grep -Ev 'INFO' file.txt` |
+| 13 | Show lines starting with # (comments only) | `grep -E '^#' file.txt` |
+| 14 | Show empty (blank) lines | `grep -E '^$' file.txt` |
+| 15 | Remove all comments and blank lines ✅ | `grep -Ev '^(#|$)' file.txt` |
+| 16 | Show lines that start with a digit | `grep -E '^[0-9]' file.txt` |
+
 ---
 
 # 💡 Notes
