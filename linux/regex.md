@@ -115,14 +115,14 @@ grep -E '\$HOME' file.txt
 ```
 ---
 
-### additional examples
+### Additional examples
 
-#### ^$
+#### `^$`
 matches a blank (empty) line — here’s why:
 
-^ → means start of line
+`^` → means start of line
 
-$ → means end of line
+`$` → means end of line
 
 When they appear right next to each other, it means:
 
