@@ -66,7 +66,7 @@ EOF
 | `*` | Zero or more | `ba*` → “b”, “ba”, “baa”, etc. |
 | `+` | One or more | `ba+` → “ba”, “baa”, etc. |
 | `?` | Zero or one (optional) | `colou?r` → “color” or “colour” |
-| `\|` | OR operator | `foo|bar` → “foo” or “bar” |
+| `\|` | OR operator | `foo\|bar` → “foo” or “bar” |
 | `[]` | Character set | `[abc]` → “a”, “b”, or “c” |
 | `()` | Grouping | `(abc)+` → repeat “abc” |
 | `{n,m}` | Repeat between n and m times | `a{2,4}` → “aa”, “aaa”, “aaaa” |
