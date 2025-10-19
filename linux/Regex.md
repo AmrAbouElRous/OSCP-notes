@@ -45,11 +45,14 @@ EOF
 | **12** | Lines that do **not** contain the word “INFO”             | `grep -Ev 'INFO' file.txt`                                          |                            |
 | **13** | Lines starting with `#` (comments only)                   | `grep -E '^#' file.txt`                                             |                            |
 | **14** | Empty (blank) lines                                       | `grep -E '^$' file.txt`                                             |                            |
-| **15** | **Remove all comments and blank lines** ✅                 | `grep -Ev '^(#                                                      | $)' file.txt`              |
+| **15** | **Remove all comments and blank lines** ✅                | `grep -Ev '^(#|$)' file.txt` |
+| **16** | Lines that start with a digit | `grep -E '^[0-9]' file.txt` |
+
 
 💡 Notes
+^ → start of line (example: ^INFO matches lines that begin with INFO)
 
-^ → start of line
+^ inside a character class (first character) → negation (example: [^0-9] matches any character that is not a digit)
 
 $ → end of line
 
@@ -63,7 +66,7 @@ $ → end of line
 
 | → OR
 
-[] → character set
+[] → character set (e.g., [abc])
 
 () → grouping
 
@@ -74,3 +77,28 @@ $ → end of line
 -i → ignore case
 
 -E → use Extended Regular Expressions (modern and recommended)
+
+Special Sequences (Shortcut Classes)
+
+| Token | Matches                                            | Equivalent      |
+| ----- | -------------------------------------------------- | --------------- |
+| `\d`  | Any digit                                          | `[0-9]`         |
+| `\D`  | Any non-digit                                      | `[^0-9]`        |
+| `\w`  | Any “word” character (letters, digits, underscore) | `[A-Za-z0-9_]`  |
+| `\W`  | Any non-word character                             | `[^A-Za-z0-9_]` |
+| `\s`  | Any whitespace (space, tab, newline)               | `[ \t\r\n\f]`   |
+| `\S`  | Any non-whitespace                                 | `[^ \t\r\n\f]`  |
+| `\b`  | Word boundary                                      | —               |
+| `\B`  | Non-word boundary                                  | —               |
+
+Some characters have **special meanings** in regex:  
+`.` `*` `+` `?` `|` `^` `$` `()` `[]` `{}` `\`
+
+If you want to match them **literally**, you must **escape them with `\`**.
+#### 💡 Example in `grep -E`
+```bash
+# match any file containing "version 1.0" literally
+grep -E 'version 1\.0' file.txt
+
+# match literal dollar sign
+grep -E '\$HOME' file.txt
