@@ -113,3 +113,24 @@ grep -E 'version 1\.0' file.txt
 # Match literal dollar sign
 grep -E '\$HOME' file.txt
 ```
+---
+
+### additional examples
+
+#### ^$
+matches a blank (empty) line — here’s why:
+
+^ → means start of line
+
+$ → means end of line
+
+When they appear right next to each other, it means:
+
+“A line that starts and ends immediately — with nothing in between`
+```bash
+cat file.txt | grep -Ev '^$' # delete blank lines
+cat file.txt | grep -Ev '^#' # delete all comments
+cat file.txt | grep -Ev '^(#|$)' #delete all blank lines and comments
+cat file.txt | grep -Ev '^(#|$)' | sort | uniq 
+```
+
