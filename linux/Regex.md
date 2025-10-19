@@ -27,25 +27,28 @@ My neighbour's favourite colour is green.
 The quick brown fox jumps over 123 lazy dogs.
 EOF
 ```
-| # | Description | Command |
-|---|-------------|---------|
-| **1** | Lines containing the word “ERROR” | <code>grep -E 'ERROR' file.txt</code> |
-| **2** | Lines starting with “INFO” | <code>grep -E '^INFO' file.txt</code> |
-| **3** | Lines ending with “bash” | <code>grep -E 'bash$' file.txt</code> |
-| **4** | Lines that contain a number | <code>grep -E '[0-9]+' file.txt</code> |
-| **5** | Lines containing an email address | <code>grep -E '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' file.txt</code> |
-| **6** | Lines containing “color” or “colour” | <code>grep -E 'colou?r' file.txt</code> |
-| **7** | Lines with uppercase words only (e.g., INFO, WARN, ERROR) | <code>grep -E '^[A-Z]+$' file.txt</code> |
-| **8** | Lines with lowercase words only | <code>grep -E '^[a-z ]+$' file.txt</code> |
-| **9** | Lines with both letters and digits | <code>grep -E '([A-Za-z].*[0-9]|[0-9].*[A-Za-z])' file.txt</code> |
-| **10** | Lines between 20–40 characters long | <code>grep -E '^.{20,40}$' file.txt</code> |
-| **11** | Lines that contain “amro” (case-insensitive) | <code>grep -Ei 'amro' file.txt</code> |
-| **12** | Lines that do **not** contain the word “INFO” | <code>grep -Ev 'INFO' file.txt</code> |
-| **13** | Lines starting with `#` (comments only) | <code>grep -E '^#' file.txt</code> |
-| **14** | Empty (blank) lines | <code>grep -E '^$' file.txt</code> |
-| **15** | **Remove all comments and blank lines** ✅ | <code>grep -Ev '^(#|$)' file.txt</code> |
-| **16** | Lines that start with a digit | <code>grep -E '^[0-9]' file.txt</code> |
 
+```bash
+| # | Description | Command |
+|---|--------------|----------|
+| **1** | Lines containing the word “ERROR” | `grep -E 'ERROR' file.txt` |
+| **2** | Lines starting with “INFO” | `grep -E '^INFO' file.txt` |
+| **3** | Lines ending with “bash” | `grep -E 'bash$' file.txt` |
+| **4** | Lines that contain a number | `grep -E '[0-9]+' file.txt` |
+| **5** | Lines containing an email address | `grep -E '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' file.txt` |
+| **6** | Lines containing “color” or “colour” | `grep -E 'colou?r' file.txt` |
+| **7** | Lines with uppercase words only (e.g., INFO, WARN, ERROR) | `grep -E '^[A-Z]+$' file.txt` |
+| **8** | Lines with lowercase words only | `grep -E '^[a-z ]+$' file.txt` |
+| **9** | Lines with both letters and digits | `grep -E '([A-Za-z].*[0-9]|[0-9].*[A-Za-z])' file.txt` |
+| **10** | Lines between 20–40 characters long | `grep -E '^.{20,40}$' file.txt` |
+| **11** | Lines that contain “amro” (case-insensitive) | `grep -Ei 'amro' file.txt` |
+| **12** | Lines that do **not** contain the word “INFO” | `grep -Ev 'INFO' file.txt` |
+| **13** | Lines starting with `#` (comments only) | `grep -E '^#' file.txt` |
+| **14** | Empty (blank) lines | `grep -E '^$' file.txt` |
+| **15** | **Remove all comments and blank lines** ✅ | `grep -Ev '^(#|$)' file.txt` |
+| **16** | Lines that start with a digit | `grep -E '^[0-9]' file.txt` |
+
+```
 
 💡 Notes
 ^ → start of line (example: ^INFO matches lines that begin with INFO)
