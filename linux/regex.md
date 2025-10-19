@@ -49,7 +49,7 @@ EOF
 | 12 | Show lines that do not contain the word “INFO” | `grep -Ev 'INFO' file.txt` |
 | 13 | Show lines starting with # (comments only) | `grep -E '^#' file.txt` |
 | 14 | Show empty (blank) lines | `grep -E '^$' file.txt` |
-| 15 | Remove all comments and blank lines ✅ | ` grep -Ev '^(#/|$)' file.txt ` |
+| 15 | Remove all comments and blank lines ✅ | `grep -Ev '^(#\|$)' file.txt` |
 | 16 | Show lines that start with a digit | `grep -E '^[0-9]' file.txt` |
 
 ---
