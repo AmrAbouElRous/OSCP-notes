@@ -27,53 +27,86 @@ My neighbour's favourite colour is green.
 The quick brown fox jumps over 123 lazy dogs.
 EOF
 ```
-| #  | Description                                               | Command                                                             |
-|----|-----------------------------------------------------------|---------------------------------------------------------------------|
-| 1  | Lines containing the word “ERROR”                         | `grep -E 'ERROR' file.txt`                                          |
-| 2  | Lines starting with “INFO”                                | `grep -E '^INFO' file.txt`                                          |
-| 3  | Lines ending with “bash”                                  | `grep -E 'bash$' file.txt`                                          |
-| 4  | Lines that contain a number                               | `grep -E '[0-9]+' file.txt`                                         |
-| 5  | Lines containing an email address                         | `grep -E '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' file.txt` |
-| 6  | Lines containing “color” or “colour”                      | `grep -E 'colou?r' file.txt`                                        |
-| 7  | Lines with uppercase words only (e.g., INFO, WARN, ERROR) | `grep -E '^[A-Z]+$' file.txt`                                       |
-| 8  | Lines with lowercase words only                           | `grep -E '^[a-z ]+$' file.txt`                                      |
-| 9  | Lines with both letters and digits                        | `grep -E '([A-Za-z].*[0-9]|[0-9].*[A-Za-z])' file.txt`              |
-| 10 | Lines between 20–40 characters long                       | `grep -E '^.{20,40}$' file.txt`                                     |
-| 11 | Lines that contain “amro” (case-insensitive)              | `grep -Ei 'amro' file.txt`                                          |
-| 12 | Lines that do **not** contain the word “INFO”             | `grep -Ev 'INFO' file.txt`                                          |
-| 13 | Lines starting with `#` (comments only)                   | `grep -E '^#' file.txt`                                             |
-| 14 | Empty (blank) lines                                       | `grep -E '^$' file.txt`                                             |
-| 15 | **Remove all comments and blank lines** ✅                 | `grep -Ev '^(#|$)' file.txt`                                        |
-| 16 | Lines that start with a digit                             | `grep -E '^[0-9]' file.txt`                                         |
 
-💡 Notes
-^ → start of line (example: ^INFO matches lines that begin with INFO)
+# 🔍 `grep -E` Regex Practice Examples
 
-^ inside a character class (first character) → negation (example: [^0-9] matches any character that is not a digit)
+## 1. Find lines containing the word “ERROR”
+```bash
+grep -E 'ERROR' file.txt```
+## 2. Find lines starting with “INFO”
+```bash
+grep -E '^INFO' file.txt```
+## 3. Find lines ending with “bash”
+```bash
+grep -E 'bash$' file.txt```
+## 4. Find lines that contain a number
+```bash
+grep -E '[0-9]+' file.txt```
+## 5. Find lines containing an email address
+```bash
+grep -E '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' file.txt```
+## 6. Find lines containing “color” or “colour”
+```bash
+grep -E 'colou?r' file.txt```
+## 7. Find lines with uppercase words only (like INFO, WARN, ERROR)
+```bash
+grep -E '^[A-Z]+$' file.txt```
+## 8. Find lines with lowercase words only
+```bash
+grep -E '^[a-z ]+$' file.txt```
+## 9. Find lines that contain both letters and digits
+```bash
+grep -E '([A-Za-z].*[0-9]|[0-9].*[A-Za-z])' file.txt```
+## 10. Find lines between 20–40 characters long
+```bash
+grep -E '^.{20,40}$' file.txt```
+## 11. Find lines that contain “amro” (case-insensitive)
+```bash
+grep -Ei 'amro' file.txt```
+## 12. Show lines that do not contain the word “INFO”
+```bash
+grep -Ev 'INFO' file.txt```
+## 13. Show lines starting with # (comments only)
+```bash
+grep -E '^#' file.txt```
+## 14. Show empty (blank) lines
+```bash
+grep -E '^$' file.txt```
+## 15. Remove all comments and blank lines ✅
+```bash
+grep -Ev '^(#|$)' file.txt```
+## 16. Show lines that start with a digit
+```bash
+grep -E '^[0-9]' file.txt
+```
+#💡 Notes
+## ^ → start of line (example: ^INFO matches lines that begin with INFO)
 
-$ → end of line
+## ^ inside a character class (first character) → negation (example: [^0-9] matches any character that is not a digit)
 
-. → any single character
+## $ → end of line
 
-* → zero or more
+## . → any single character
 
-+ → one or more
+## * → zero or more
 
-? → zero or one (optional)
+## + → one or more
 
-| → OR
+## ? → zero or one (optional)
 
-[] → character set (e.g., [abc])
+## | → OR
 
-() → grouping
+## [] → character set (e.g., [abc])
 
-{n,m} → repeat between n and m times
+## () → grouping
 
--v → invert match (show non-matching lines)
+## {n,m} → repeat between n and m times
 
--i → ignore case
+## -v → invert match (show non-matching lines)
 
--E → use Extended Regular Expressions (modern and recommended)
+## -i → ignore case
+
+## -E → use Extended Regular Expressions (modern and recommended)
 
 Special Sequences (Shortcut Classes)
 
