@@ -127,6 +127,7 @@ matches a blank (empty) line — here’s why:
 When they appear right next to each other, it means:
 
 “A line that starts and ends immediately — with nothing in between`
+
 ```bash
 cat file.txt | grep -Ev '^$' # delete blank lines
 cat file.txt | grep -Ev '^#' # delete all comments
