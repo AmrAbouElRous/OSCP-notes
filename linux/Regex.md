@@ -28,7 +28,7 @@ My favorite color is blue.
 My neighbour's favourite colour is green.
 The quick brown fox jumps over 123 lazy dogs.
 EOF
-
+```
 | # | Description | Command |
 |---|--------------|----------|
 | **1** | Lines containing the word “ERROR” | `grep -E 'ERROR' file.txt` |
