@@ -279,3 +279,78 @@ sudo whoami
 | `/etc/sudoers.d/`   | User-specific sudo rules               | `sudo visudo -f /etc/sudoers.d/filename`        | ✅ Safe    |
 | `visudo`            | Validates syntax before saving         | Used for both                                   | ✅ Always  |
 | `NOPASSWD`          | Allows sudo without password           | In `/etc/sudoers.d/customfile`                  | ✅ Safe if intentional |
+
+---
+
+# 🖥️ TTY vs PTS in Linux
+
+## 🔹 TTY (Teletype Terminal)
+
+- Refers to **real text-based consoles** provided by Linux.  
+- Switch between them using:
+
+Ctrl + Alt + F1 … F6
+
+
+- Each **tty1–tty6** is an independent **text-only login screen** (no GUI).  
+- **tty7** is usually reserved for the **graphical desktop** (X11/Wayland).  
+- You can log in directly using your **username and password** here.
+
+**Example:**  
+`/dev/tty1` → User logged in on a physical console.
+
+---
+
+## 🔹 PTS (Pseudo-Terminal Slave)
+
+- Refers to **virtual terminals** created inside your **graphical environment** or via **SSH**.  
+- Every time you open a **terminal window**, **new tab**, or **SSH session**, Linux creates a new `/dev/pts/X`.  
+- Each PTS is linked to a “master” process that manages input/output in the GUI or over the network.
+
+**Examples:**  
+
+/dev/pts/0 → First terminal window
+/dev/pts/1 → Second tab
+/dev/pts/2 → SSH session
+
+---
+
+# 🧭 Visual Overview: TTY vs PTS in Linux
+
+Understanding how **real terminals (TTYs)** and **virtual terminals (PTS)** relate inside a Linux system:
+
+```
+ ┌──────────────────────────────────────────────────────────────┐
+ │                     Linux System                             │
+ │                                                              │
+ │  ┌───────────────┬───────────────┬───────────────┐           │
+ │  │ tty1 (text)   │ tty2 (text)   │ tty3 (text)   │  ← Switch using Ctrl+Alt+F1..F6
+ │  │ Login screen  │ Empty console │ Other console │           │
+ │  └───────────────┴───────────────┴───────────────┘           │
+ │                                                              │
+ │  ┌────────────────────────────────────────────────────────┐  │
+ │  │ tty7 (graphical session)                               │  │
+ │  │  ┌────────────────────────────┐                        │  │
+ │  │  │ GUI Terminal → /dev/pts/0  │  ← 1st terminal tab     │  │
+ │  │  │ GUI Terminal → /dev/pts/1  │  ← 2nd terminal tab     │  │
+ │  │  │ SSH session  → /dev/pts/2  │  ← remote shell         │  │
+ │  │  └────────────────────────────┘                        │  │
+ │  └────────────────────────────────────────────────────────┘  │
+ │                                                              │
+ └──────────────────────────────────────────────────────────────┘
+```
+
+### 🧠 Key Points
+
+- **`tty1`–`tty6`** → Real text consoles (accessible with `Ctrl + Alt + F1..F6`)
+- **`tty7`** → Usually where your graphical desktop (X11/Wayland) runs
+- **`/dev/pts/*`** → Virtual terminals inside your GUI (each terminal tab or SSH session)
+
+### 🔍 Quick Checks
+
+```bash
+tty         # Show which terminal you’re using
+who         # See all logged-in users and their terminals
+last        # View historical logins (tty vs pts)
+w           # shows who is logged in and what they are doing in real time
+```
