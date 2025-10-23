@@ -173,6 +173,12 @@ echo "Hello, $username!"
 # Silent password input
 read -sp "Enter password: " password
 echo "\nPassword received."
+
+read name       # -s to hide it
+
+location="/etc/passwd"
+read content < $location
+echo "$content"
 ```
 
 **Notes:**
@@ -213,6 +219,12 @@ echo "Year: $(date +%Y)"
 echo "Month: $(date +%m)"
 echo "Day: $(date +%d)"
 echo "Time: $(date +%H:%M:%S)"
+
+start=$(date +%s)  #seconds from 1970 till now
+sleep 5
+end=$(date +%s)
+diff=$((end-start))
+echo "sleeping for $diff seconds"
 ```
 
 **Useful date formats:**
