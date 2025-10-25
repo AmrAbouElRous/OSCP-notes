@@ -226,3 +226,6 @@ ASN → belongs to a network (organization or ISP) that owns or manages a block 
 
 ### search in google mapping ASN to IP
 ![ASN_to_IP](images/ASN_to_IP.png)
+
+### now go to shodan and search `net:102.223.94.0/24` and `net:193.227.50.0/23`
+![ASN_to_IP](images/shodan.png)
