@@ -225,4 +225,4 @@ IP address → belongs to a device or server.
 ASN → belongs to a network (organization or ISP) that owns or manages a block of IPs.
 
 ### search in google mapping ASN to IP
-![ASN_to_IP](/home/amro/Pictures/ASN_to_IP.png)
+![ASN_to_IP](images/ASN_to_IP.png)
