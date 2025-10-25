@@ -228,4 +228,11 @@ ASN → belongs to a network (organization or ISP) that owns or manages a block 
 ![ASN_to_IP](images/ASN_to_IP.png)
 
 ### now go to shodan and search `net:102.223.94.0/24` and `net:193.227.50.0/23`
-![ASN_to_IP](images/shodan.png)
+![shodan](images/shodan.png)
+
+**search with ASN** `asn:AS328762`
+![shodan2](images/shodan2.png)
+
+### censys
+Do n\`t worry about search operators just type `AS328762` an AI will generate you the right query
+![censys](images/censys.png)
