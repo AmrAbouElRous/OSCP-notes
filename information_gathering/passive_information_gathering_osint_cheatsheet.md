@@ -27,6 +27,7 @@ Check records with `dig` or `nslookup`:
 ```bash
 # A record
 dig example.com A
+dig example.com A +short
 
 # MX record
 dig example.com MX
@@ -79,7 +80,7 @@ A single webserver uses the `Host` header to decide which site to serve.
 - **Different owners (also common):** Sites behind CDNs (Cloudflare, Fastly) share IP addresses across unrelated domains.
 
 So: **same IP ≠ same owner**. Always corroborate with WHOIS, TLS certs, hosting provider, and other evidence.
-
+- **Conclusion** `example.com`and`example.org` not the same owner even if they have the same IP ,However, `mail.example.com` is a **subdomain** of `example.com`, meaning they belong to the same owner
 ---
 
 ## Domain vs Subdomain
@@ -95,7 +96,7 @@ Example: in `blog.google.com`, `blog` is the subdomain and `google.com` is the m
 - `dig` — powerful and flexible. Good for scripts and specific queries.
   - `dig example.com A`
   - `dig example.com +short`
-  - `dig -x <ip>  # or use whois <ip>`
+  - `dig -x <ip>  # or use whois <ip> if theris no PTR record`
 
 - `nslookup` — simpler, quick ad-hoc queries.
   - `nslookup example.com`
@@ -120,8 +121,6 @@ site:megacorpone.com filetype:pdf
 ```
 There are curated lists/databases such as the **Google Hacking Database (GHDB)** for examples.
 
-**Warning:** Dorking is powerful — use responsibly and within legal/ethical boundaries.
-
 ---
 
 ## GitHub discovery & automation
@@ -132,7 +131,6 @@ For automated scanning of repos for secrets and sensitive info, consider tools s
 - **GitRob** — finds interesting files and exposures in repositories.
 - **Gitleaks** — detects hard-coded secrets in git repositories.
 
-Use automation carefully and only on repositories you are authorized to test.
 
 ---
 
@@ -157,9 +155,10 @@ Note: Some of these services perform active checks from the provider's infrastru
 ## Other useful services & notes
 - **crt.sh** — certificate transparency search; useful to discover domain names and subdomains appearing in TLS certificates.
 - **Shodan** — internet device/service discovery.
+- **Censys** -
 - **Netcraft** — site and hosting intelligence, historical info, and technology fingerprinting.
+- **wappalyzer extension** - let you know what technolodies used in the current website
 - **WHOIS** — registrar/registrant details (subject to privacy redaction).
-
 ---
 
 
