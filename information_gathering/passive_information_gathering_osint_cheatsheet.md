@@ -71,7 +71,7 @@ These commands show the DNS records for that domain.
 
 ## When PTR is missing — alternatives
 Sometimes a reverse PTR record doesn't exist. When that happens, use other passive methods:
-- **WHOIS** lookup for owner/registrant info.
+- **WHOIS** lookup for owner/registrant info. `whois 102.223.94.154`
 - **Passive internet scanners** (e.g., Shodan) to find device/service metadata.
 - **Certificate transparency logs** (crt.sh) to discover names tied to TLS certificates.
 
@@ -110,7 +110,7 @@ Example: in `blog.google.com`, `blog` is the subdomain and `google.com` is the m
 - `dig` — powerful and flexible. Good for scripts and specific queries.
   - `dig example.com A`
   - `dig example.com +short`
-  - `dig -x <ip>`
+  - `dig -x <ip>  # or use whois <ip>`
 
 - `nslookup` — simpler, quick ad-hoc queries.
   - `nslookup example.com`
@@ -177,13 +177,6 @@ Note: Some of these services perform active checks from the provider's infrastru
 
 ---
 
-## Useful notes & best practices
-- Corroborate any single piece of evidence (IP, cert, header) with other sources before concluding ownership.
-- Distinguish **passive** (no direct probing from you) vs **active** (scanning from your IP) techniques; always follow legal and ethical constraints.
-- When automating search (GitHub, Google, Shodan), obey rate limits and terms of service.
-- Keep records of findings and timestamps — OSINT is time-sensitive.
-
----
 
 ## Quick references & commands (one-liner cheats)
 ```bash
@@ -199,8 +192,37 @@ dig -x 8.8.8.8 +short
 # Google dork example
 site:megacorpone.com filetype:pdf
 ```
-
 ---
+## Real word examples
+``` bash
+┌──(amro㉿amro)-[~/Documents/oscp/information_gathering]
+└─$ dig eelu.edu.eg +short     
+102.223.94.154
 
-*Prepared for passive information gathering/OSINT — edit freely.*
+┌──(amro㉿amro)-[~/Documents/oscp/information_gathering]
+└─$ #whois 102.223.94.154
+                                                                           
+┌──(amro㉿amro)-[~/Documents/oscp/information_gathering]
+└─$ whois 102.223.94.154 | egrep -i "origin|aut-num|descr|org"
+descr:          Mansoura University
+org:            ORG-MU4-AFRINIC
+organisation:   ORG-MU4-AFRINIC
+org-name:       Mansoura University
+org-type:       EU-PI
+origin:         AS328762
+descr:          Mansoura University
+```
+origin:         AS328762
+🧠 What is AS328762 `whois AS328762`
 
+It’s a unique number assigned to Mansoura University’s network by AFRINIC (the African Internet registry).
+It identifies their Autonomous System (AS) — which is the set of IP networks they control and route on the Internet.
+
+Think of it like this:
+
+IP address → belongs to a device or server.
+
+ASN → belongs to a network (organization or ISP) that owns or manages a block of IPs.
+
+### search in google mapping ASN to IP
+![ASN_to_IP](/home/amro/Pictures/ASN_to_IP.png)
