@@ -234,5 +234,5 @@ ASN → belongs to a network (organization or ISP) that owns or manages a block 
 ![shodan2](images/shodan2.png)
 
 ### censys
-Do n\`t worry about search operators just type `AS328762` an AI will generate you the right query
+Do not worry about search operators just type `AS328762` an AI will generate you the right query
 ![censys](images/censys.png)
