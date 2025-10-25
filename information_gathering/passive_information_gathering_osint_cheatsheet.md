@@ -4,21 +4,6 @@
 
 ---
 
-## Table of contents
-1. [DNS fundamentals & common record types](#dns-fundamentals--common-record-types)
-2. [Quick DNS examples & commands](#quick-dns-examples--commands)
-3. [When PTR is missing — alternatives](#when-ptr-is-missing---alternatives)
-4. [IP ↔ DNS name relationships](#ip--dns-name-relationships)
-5. [Domain vs Subdomain](#domain-vs-subdomain)
-6. [Tools: dig, nslookup, host](#tools-dig-nslookup-host)
-7. [Search engines & Google Dorks](#search-engines--google-dorks)
-8. [GitHub discovery & automation](#github-discovery--automation)
-9. [Shodan vs Search Engines](#shodan-vs-search-engines)
-10. [Security posture checks (passive/third-party)](#security-posture-checks-passivethird-party)
-11. [Useful notes & best practices](#useful-notes--best-practices)
-
----
-
 ## DNS fundamentals & common record types
 A **DNS record** is like an entry in the internet's address book — it tells clients how to find and connect to a domain. Each record type serves a different purpose.
 
