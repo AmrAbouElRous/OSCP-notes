@@ -18,9 +18,12 @@ dig -x 102.223.94.154   # PTR (Reverse DNS → IP to Domain)
 dig eelu.edu.eg ANY
 ```
 
-### 🌐 Use a Specific DNS Server (e.g., Cloudflare)
+### 🌐 Use a Specific DNS Server (e.g., Cloudflare,Google)
 ```bash
+# Cloudflare DNS resolver
 dig @1.1.1.1 eelu.edu.eg ANY
+# Google DNS resolver
+dig @8.8.8.8 megacorpone.com A +noall +answer
 ```
 
 ### 🧹 Clean Output (Answers Only)
@@ -70,8 +73,44 @@ nslookup
 > 102.223.94.154
 > exit
 ```
-
 ---
+### Additional
+8.8.8.8 is not the IP address for Google’s website — it’s the IP address of Google Public DNS, a DNS resolver service provided by Google.
+```
+┌──(amro㉿amro)-[~]
+└─$ dig google.com A +noall +answer
+google.com.             267     IN      A       142.250.200.206
+
+┌──(amro㉿amro)-[~]
+└─$ dig @8.8.8.8 google.com A +noall +answer     
+google.com.             300     IN      A       142.250.200.206
+                                                                       
+┌──(amro㉿amro)-[~]
+└─$ dig @1.1.1.1 google.com A +noall +answer
+google.com.             205     IN      A       142.251.37.238
+
+┌──(amro㉿amro)-[~]
+└─$ whois 142.250.200.206 | grep -E 'OrgName|Organization'
+whois 142.251.37.238 | grep -E 'OrgName|Organization'
+
+Organization:   Google LLC (GOGL)
+OrgName:        Google LLC
+Organization:   Google LLC (GOGL)
+OrgName:        Google LLC
+```
+-**Different IPs** for the same domain (like google.com) are usually because of load balancing, specifically DNS-based load balancing (also called GeoDNS or Anycast routing).
+🌍 GeoDNS (Geographical Load Balancing)
+Each DNS resolver (Google, Cloudflare, etc.) may give you an IP of the nearest data center based on your location or their server’s location.
+
+⚡ Load Distribution
+Large companies like Google use multiple servers worldwide. DNS returns different IPs so that not all users hit the same server.
+
+🔁 Redundancy / Failover
+If one data center or IP is down, DNS automatically returns another available one — ensuring reliability.
+
+🧠 Anycast Routing (used by big providers)
+A single IP (like 8.8.8.8) is actually used by many servers globally. Your request automatically goes to the nearest node.
+
 
 ✅ **Tip:** Use `+short` with `dig` for simplified outputs.
 
