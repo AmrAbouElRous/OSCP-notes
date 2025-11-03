@@ -111,6 +111,8 @@ Add:
 Host 192.168.1.4
     HostKeyAlgorithms +ssh-rsa
     PubkeyAcceptedAlgorithms +ssh-rsa
+    SetEnv TERM=xterm
+    RequestTTY yes
 ```
 
 Save and retry `ssh msfadmin@192.168.1.4`.
