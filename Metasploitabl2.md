@@ -114,8 +114,9 @@ Host 192.168.1.4
     SetEnv TERM=xterm
     RequestTTY yes
 ```
-Error opening terminal: xterm-256color means that Metasploitable2 does not have the necessary terminal information files (terminfo) to understand how to display the graphical interface of nano using the specific terminal type your client is advertising (xterm-256color). 
-This usually happens when you are connecting via SSH from a modern terminal emulator (like the one in Kali Linux) to an older system like Metasploitable2 so we SetEnvironment for terminal to be xterm.
+> Error opening terminal: xterm-256color means that Metasploitable2 does not have the necessary terminal information files (terminfo) to understand how to display the graphical interface of nano using the specific terminal type your client is advertising (xterm-256color). 
+> This usually happens when you are connecting via SSH from a modern terminal emulator (like the one in Kali Linux) to an older system like Metasploitable2 so we SetEnvironment for terminal to be xterm.
+
 Save and retry `ssh msfadmin@192.168.1.4`.
 
 > Alternatively, use inline options without editing the config:
