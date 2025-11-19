@@ -124,7 +124,7 @@ No.	Time		Source		Destination  Protocol  Length 	Infor
 756	796.260980220	192.168.1.5	192.168.1.4	TCP	66	37224 → 55555 [ACK] Seq=5 Ack=2 Win=64256 Len=0 TSval=1303603654 TSecr=1840438
 ```
 
-- explaination : **SYN** consumes 1 , **FIN** consumes 1 , **Len** consumes lenght of data sent 
+- **SYN** consumes 1 , **FIN** consumes 1 , **Len** consumes lenght of data sent 
 - Wireshark normalizes sequence numbers by default. It sets the first packet’s Seq = 0 even if the real ISN is random (e.g., 345345345).
 - So everything you see is relative seq numbers easy mode , if u want the real numbers turn off it from : View → Coloring Rules → Relative sequence numbers.
 - if u didn`t specify the source port of netcat (in the attacker machine) it generate a random port for our example its 37224
