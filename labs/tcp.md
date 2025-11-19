@@ -1,5 +1,5 @@
 ## TCP
-
+TCP (Transmission Control Protocol) — a reliable, connection-oriented protocol that ensures data is delivered in order, without loss, and allows two devices to establish and manage a communication session
 ---
 ### TCP 3-Way Handshake
 ```
