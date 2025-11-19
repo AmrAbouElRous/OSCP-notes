@@ -116,140 +116,102 @@ No.	Time		Source		Destination  Protocol  Length 	Infor
 756	796.260980220	192.168.1.5	192.168.1.4	TCP	66	37224 → 55555 [ACK] Seq=5 Ack=2 Win=64256 Len=0 TSval=1303603654 TSecr=1840438
 ```
 
-explaination : SYN consumes 1 , FIN consumes 1 , Len consumes lenght of data sent 
-
-Wireshark normalizes sequence numbers by default. It sets the first packet’s Seq = 0 even if the real ISN is random (e.g., 345345345).
-
-So everything you see is relative seq numbers easy mode , if u want the real numbers turn off it from : View → Coloring Rules → Relative sequence numbers.
-
-if u didn`t specify the source port of netcat (in the attacker machine) it generate a random port for our example its 37224
+- explaination : **SYN** consumes 1 , **FIN** consumes 1 , **Len** consumes lenght of data sent 
+- Wireshark normalizes sequence numbers by default. It sets the first packet’s Seq = 0 even if the real ISN is random (e.g., 345345345).
+- So everything you see is relative seq numbers easy mode , if u want the real numbers turn off it from : View → Coloring Rules → Relative sequence numbers.
+- if u didn`t specify the source port of netcat (in the attacker machine) it generate a random port for our example its 37224
 
 ---
-# Full Explanation of Packets (13 → 756)
+## Full Explanation of Packets (13 → 756)
 ### Packet 13 — SYN
+```
 192.168.1.5 → 192.168.1.4  [SYN]
-
 Seq=0  Len=0
-
 What this means:
-
 Client starts the connection.
-
 SYN flag = “I want to start TCP”
-
 Seq = 0 (Wireshark made it 0, real number is random)
-
 Len = 0 (SYN carries no data)
-
 📌 SYN consumes 1 sequence number
-
 So next client SEQ will become 1.
-
+```
 ### Packet 14 — SYN/ACK
+```
 192.168.1.4 → 192.168.1.5  [SYN, ACK]
-
 Seq=0  Ack=1
-
 Meaning:
-
 Server replies with its own SYN + ACK.
-
 Seq = 0 (server’s first sequence number)
-
 Ack = 1 → “I got your SYN, which used 1 seq number”
-
 Because client SYN = 0 → the next expected is 1.
-
 📌 Server SYN also consumes 1 seq number
-
 So server’s next sequence number will be 1.
+```
 
 ### Packet 15 — ACK
+```
 192.168.1.5 → 192.168.1.4  [ACK]
-
 Seq=1 Ack=1
-
 ✔ Meaning:
-
 Client acknowledges the server SYN.
-
 Seq = 1 (client consumed a sequence number because SYN consumed 1)
-
 Ack = 1 (server’s SYN=0 → next expected = 1)
-
 🎉 Connection is now fully established.
-
-## 📨 Sending data (“hi\n”)
-
+```
+### 📨 Sending data (“hi\n”)
+```
 Netcat sends 3 bytes:
 h i \n → 3 bytes
-
+```
 ### Packet 20 — PSH/ACK containing data
+```
 Seq=1 Ack=1 Len=3
-
 Meaning:
-
 Data starts at Seq=1 (because 0 was SYN)
-
 3 bytes of data → ranges from 1,2,3
-
 Next expected from client = 1 + 3 = 4
+```
 ### Packet 21 — ACK from server
+```
 Seq=1 Ack=4
-
 Meaning:
-
 Server acknowledges receiving 3 bytes.
-
 Ack=4 → “I got up to sequence number 3, next expected is 4”
-
 Server's Seq=1 (because its SYN used 0; ACK used no seq)
+```
 
-## 🔚 Closing (FIN from client)
+### 🔚 Closing (FIN from client)
 
 FIN behaves like SYN → consumes 1 sequence number.
 
 ### Packet 754 — FIN/ACK (client → server)
+```
 Seq=4 Ack=1
-
 ✔ Meaning:
-
 Client’s next seq is 4 because:
-
 SYN = 1
-
 "hi" = 3 bytes
-
 → next = 4
-
 FIN uses 1 sequence number.
-
 After FIN:
-
 Client’s next seq will be 5
-
+```
 ### Packet 755 — FIN/ACK (server → client)
+```
 Seq=1 Ack=5
-
 ✔ Meaning:
-
 Server FIN starts at Seq=1 (server hasn't sent data, only SYN)
-
 Ack=5 → “I acknowledge your FIN (which consumed sequence number 4 → so next = 5)”
-
 FIN consumes one seq → server’s next seq becomes 2.
-
+```
 
 ### Packet 756 — Final ACK (client → server)
+```
 Seq=5 Ack=2
-
 ✔ Meaning:
-
 Client acknowledges the server’s FIN.
-
 Client Seq = 5 (from earlier FIN)
-
 Ack = 2 (server SYN=0, FIN=1 → next = 2)
-
 🎉 Connection closed cleanly.
+```
 
