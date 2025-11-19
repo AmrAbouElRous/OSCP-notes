@@ -1,6 +1,10 @@
 ## TCP
-TCP (Transmission Control Protocol) — a reliable, connection-oriented protocol that ensures data is delivered in order, without loss, and allows two devices to establish and manage a communication session
+**Transmission Control Protocol (TCP)**  
+- Reliable, connection-oriented protocol  
+- Ensures data is delivered in order, without loss  
+- Allows two devices to establish and manage a communication session
 ---
+
 ### TCP 3-Way Handshake
 ```
  ___      SYN(seq:100,ACK:0)    ___
