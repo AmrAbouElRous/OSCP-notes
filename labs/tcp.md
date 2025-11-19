@@ -128,23 +128,14 @@ if u didn`t specify the source port of netcat (in the attacker machine) it gener
 # Full Explanation of Packets (13 → 756)
 ### Packet 13 — SYN
 192.168.1.5 → 192.168.1.4  [SYN]
-
 Seq=0  Len=0
-
 What this means:
-
 Client starts the connection.
-
 SYN flag = “I want to start TCP”
-
 Seq = 0 (Wireshark made it 0, real number is random)
-
 Len = 0 (SYN carries no data)
-
 📌 SYN consumes 1 sequence number
-
 So next client SEQ will become 1.
-
 ### Packet 14 — SYN/ACK
 192.168.1.4 → 192.168.1.5  [SYN, ACK]
 
