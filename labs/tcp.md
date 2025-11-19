@@ -1,8 +1,7 @@
-# TCP Notes
-## anti-enumeration techniques
-Many ports like **HTTP:80** can change its default port.
+## TCP
+
 ---
-## TCP 3-Way Handshake
+### TCP 3-Way Handshake
 ```
  ___      SYN(seq:100,ACK:0)    ___
 |___| -----------------------> |___|
@@ -15,7 +14,7 @@ Many ports like **HTTP:80** can change its default port.
 ```
 
 ---
-### 192.168.1.4 (Target) listening
+#### 192.168.1.4 (Target) listening
 ```
 # you can do -w 500 to make the port open for 500 seconds
 # you can do nc -nluvp 4444 -w 500 if you want UDP
@@ -27,7 +26,7 @@ how ware you
 i am hacker hahahaha
 ```
 
-### 192.168.1.5 (Attacker)
+#### 192.168.1.5 (Attacker)
 ```
 ┌──(amro㉿amro)-[~]
 └─$ nc 192.168.1.4 4444
@@ -38,21 +37,21 @@ i am hacker hahahaha
 
 ---
 
-# Experiment on Wireshark Walkthrough
-## Step 1 (Target 192.168.1.4 opens a port)
+### Experiment on Wireshark Walkthrough
+#### Step 1 (Target 192.168.1.4 opens a port)
 ```
 msfadmin@metasploitable:~$ nc -nlvp 4444 -w 700
 listening on [any] 4444 ...
 connect to [192.168.1.4] from (UNKNOWN) [192.168.1.5] 54226
 ```
 
-## Step 2 (Attacker)
+#### Step 2 (Attacker)
 ```bash
 sudo wireshark
 # tcp.port == 4444 then apply in the filter then run and wait
 ```
 
-## Step 3 (Attacker scanning)
+#### Step 3 (Attacker scanning)
 ```bash
 # -z zero I/O used for scanning
 nc -nv -z 192.168.1.4 4444
@@ -62,7 +61,7 @@ nc -nv -z 192.168.1.4 4444
 Now return to Wireshark and observe the packets.
 
 ---
-## Sample Wireshark Output
+### Sample Wireshark Output
 ```
 No.	Time		Source		Destination  Protocol  Length 	Infor
 234	199.530007429	192.168.1.5	192.168.1.4	TCP	74	47812 → 4444 [SYN] Seq=0 Win=64240 Len=0 MSS=1460 SACK_PERM TSval=1290731211 TSecr=0 WS=128
@@ -74,7 +73,7 @@ No.	Time		Source		Destination  Protocol  Length 	Infor
 ```
 
 ---
-## Useful commands
+#### Useful commands
 ```
 # on the target machine to show all open ports
 netstat -nl   # all ports
@@ -87,7 +86,7 @@ netstat -nlu  # UDP only
 ```
 
 ---
-## Another Example — TCP port 55555 on Metasploitable2
+### Another Example — TCP port 55555 on Metasploitable2
 ```
 msfadmin@metasploitable:~$ nc -nlvp 55555 -w 1000
 listening on [any] 55555 ...
@@ -120,10 +119,11 @@ No.	Time		Source		Destination  Protocol  Length 	Infor
 - Wireshark normalizes sequence numbers by default. It sets the first packet’s Seq = 0 even if the real ISN is random (e.g., 345345345).
 - So everything you see is relative seq numbers easy mode , if u want the real numbers turn off it from : View → Coloring Rules → Relative sequence numbers.
 - if u didn`t specify the source port of netcat (in the attacker machine) it generate a random port for our example its 37224
+- anti-enumeration techniques : Many ports like **HTTP:80** can change its default port.
 
 ---
-## Full Explanation of Packets (13 → 756)
-### Packet 13 — SYN
+### Full Explanation of Packets (13 → 756)
+#### Packet 13 — SYN
 ```
 192.168.1.5 → 192.168.1.4  [SYN]
 Seq=0  Len=0
@@ -135,7 +135,7 @@ Len = 0 (SYN carries no data)
 📌 SYN consumes 1 sequence number
 So next client SEQ will become 1.
 ```
-### Packet 14 — SYN/ACK
+#### Packet 14 — SYN/ACK
 ```
 192.168.1.4 → 192.168.1.5  [SYN, ACK]
 Seq=0  Ack=1
@@ -148,7 +148,7 @@ Because client SYN = 0 → the next expected is 1.
 So server’s next sequence number will be 1.
 ```
 
-### Packet 15 — ACK
+#### Packet 15 — ACK
 ```
 192.168.1.5 → 192.168.1.4  [ACK]
 Seq=1 Ack=1
@@ -163,7 +163,7 @@ Ack = 1 (server’s SYN=0 → next expected = 1)
 Netcat sends 3 bytes:
 h i \n → 3 bytes
 ```
-### Packet 20 — PSH/ACK containing data
+#### Packet 20 — PSH/ACK containing data
 ```
 Seq=1 Ack=1 Len=3
 Meaning:
@@ -171,7 +171,7 @@ Data starts at Seq=1 (because 0 was SYN)
 3 bytes of data → ranges from 1,2,3
 Next expected from client = 1 + 3 = 4
 ```
-### Packet 21 — ACK from server
+#### Packet 21 — ACK from server
 ```
 Seq=1 Ack=4
 Meaning:
@@ -184,7 +184,7 @@ Server's Seq=1 (because its SYN used 0; ACK used no seq)
 
 FIN behaves like SYN → consumes 1 sequence number.
 
-### Packet 754 — FIN/ACK (client → server)
+#### Packet 754 — FIN/ACK (client → server)
 ```
 Seq=4 Ack=1
 ✔ Meaning:
@@ -196,7 +196,7 @@ FIN uses 1 sequence number.
 After FIN:
 Client’s next seq will be 5
 ```
-### Packet 755 — FIN/ACK (server → client)
+#### Packet 755 — FIN/ACK (server → client)
 ```
 Seq=1 Ack=5
 ✔ Meaning:
@@ -205,7 +205,7 @@ Ack=5 → “I acknowledge your FIN (which consumed sequence number 4 → so nex
 FIN consumes one seq → server’s next seq becomes 2.
 ```
 
-### Packet 756 — Final ACK (client → server)
+#### Packet 756 — Final ACK (client → server)
 ```
 Seq=5 Ack=2
 ✔ Meaning:
