@@ -282,3 +282,5 @@ Ack = 2 (server SYN=0, FIN=1 → next = 2)
 - Data consumes its own length (Len)
 - FIN consumes 1 sequence number
 - After 4 packets of FIN exchange, the connection closes cleanly.
+
+---
