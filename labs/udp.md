@@ -39,8 +39,10 @@ Attacker:192.168.1.5 udp:4444
 hi
 ```
 Wireshark
+```bash
 No	Time		Source		Destination   Protocol length   info
 15	54.075502774	192.168.1.5	192.168.1.4	UDP	45	33875 → 4444 Len=3
+```
 
 - UDP port is Open --> no reply
 
