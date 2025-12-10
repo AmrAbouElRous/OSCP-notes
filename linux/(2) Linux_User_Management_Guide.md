@@ -361,13 +361,6 @@ w           # shows who is logged in and what they are doing in real time
 
 Only amro is able to elevate to root using sudo, while tempest cannot.
 ```bash
-┌──(amro㉿amro)-[/home]
-└─$ ls                 
-amro  tempest
-                                                                                                                                                                                                              
-┌──(amro㉿amro)-[/home]
-└─$ su tempest
-Password: 
 ┌──(tempest㉿amro)-[/home]
 └─$ sudo su
 [sudo] password for tempest: 
