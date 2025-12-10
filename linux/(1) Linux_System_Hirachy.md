@@ -97,3 +97,10 @@ Contains files that change often — logs, mail, caches, web data, etc.
 - `/var/log/` → system logs  
 - `/var/www/` → website files  
 - `/var/spool/` → print/mail queues
+---
+### More Knowledge
+```bash
+┌──(root㉿amro)-[/]
+└─# print $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games	
+```
