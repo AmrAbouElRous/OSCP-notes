@@ -1,3 +1,5 @@
+# Linux System Hirachy
+![Screenshot](img/00.png)
 # 🧩 Most Important Linux Directories
 
 ```
