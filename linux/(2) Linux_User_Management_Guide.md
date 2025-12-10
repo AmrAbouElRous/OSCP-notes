@@ -354,3 +354,61 @@ who         # See all logged-in users and their terminals
 last        # View historical logins (tty vs pts)
 w           # shows who is logged in and what they are doing in real time
 ```
+---
+
+
+### 🔐 Scenario: User tempest Cannot Access Root While amro Can
+
+Only amro is able to elevate to root using sudo, while tempest cannot.
+```bash
+┌──(amro㉿amro)-[/home]
+└─$ ls                 
+amro  tempest
+                                                                                                                                                                                                              
+┌──(amro㉿amro)-[/home]
+└─$ su tempest
+Password: 
+┌──(tempest㉿amro)-[/home]
+└─$ sudo su
+[sudo] password for tempest: 
+tempest is not in the sudoers file.
+                                                                                                                                                                                                            
+┌──(tempest㉿amro)-[/home]
+└─$ su amro
+Password: 
+┌──(amro㉿amro)-[/home]
+└─$ sudo su
+┌──(root㉿amro)-[/home]
+└─# 
+```
+🔎 Checking Group Membership: tempest is not in the sudo group:
+```bash
+┌──(root㉿amro)-[/home]
+└─# groups tempest
+tempest : tempest
+                                                                                                                                                                                                              
+┌──(root㉿amro)-[/home]
+└─# groups amro   
+amro : amro adm dialout cdrom floppy sudo audio dip video plugdev users netdev bluetooth lpadmin wireshark scanner vboxsf kaboxer
+
+```
+🛠️ Adding tempest to the Sudo Group
+```bash
+┌──(root㉿amro)-[/home]
+└─# usermod -aG sudo tempest     
+
+┌──(root㉿amro)-[/home]
+└─# groups tempest
+tempest : tempest sudo
+```
+✅ Testing Access
+```bash
+┌──(root㉿amro)-[/home]
+└─# su tempest 
+┌──(tempest㉿amro)-[/home]
+└─$ sudo su
+[sudo] password for tempest: 
+┌──(root㉿amro)-[/home]
+└─# 
+
+```
