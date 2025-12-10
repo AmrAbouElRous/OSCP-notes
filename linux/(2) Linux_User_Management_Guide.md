@@ -357,7 +357,7 @@ w           # shows who is logged in and what they are doing in real time
 ---
 
 
-### 🔐 Scenario: User tempest Cannot Access Root While amro Can
+## 🔐 Scenario: User tempest Cannot Access Root While amro Can
 
 Only amro is able to elevate to root using sudo, while tempest cannot.
 ```bash
